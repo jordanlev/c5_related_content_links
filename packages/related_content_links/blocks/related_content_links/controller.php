@@ -58,13 +58,13 @@ class RelatedContentLinksBlockController extends BlockController {
 		//FILTER NOTES:
 		// * PageList filter() takes an attributeValue's name, not its ID
 		// * Attributes of type "select" wrap values in newline characters when saved to the database -- see http://www.concrete5.org/developers/bugs/5-4-1-1/select-type-attribute-wraps-saved-values-in-linefeed-characters/
-        $pl->filterByAttribute('related_content_category', "%\n{$relatedCategoryOptionName}\n%", "LIKE");
-        //
+		$pl->filterByAttribute('related_content_category', "%\n{$relatedCategoryOptionName}\n%", "LIKE");
+		//
 		//The following line does the exact same thing as above:
-        // $pl->filterByRelatedContentCategory(array("%\n{$relatedCategoryOptionName}\n%", 'LIKE')); //Note that the value and comparison must be passed in an array as a single argument to this magic method (if you only pass in 1 arg it does an equality comparison)
-        //
-        //And the following 2 lines do the exact same thing as above:
-        // $escapedRelatedCategoryOptionName = $db->escape($relatedCategoryOptionName); //Must manually escape values when passing 'false' as first arg to $pl->filter(), otherwise you're open to SQL injection!! See http://www.concrete5.org/community/forums/customizing_c5/pagelist_filter_by_page_custom_attributes/#379922
+		// $pl->filterByRelatedContentCategory(array("%\n{$relatedCategoryOptionName}\n%", 'LIKE')); //Note that the value and comparison must be passed in an array as a single argument to this magic method (if you only pass in 1 arg it does an equality comparison)
+		//
+		//And the following 2 lines do the exact same thing as above:
+		// $escapedRelatedCategoryOptionName = $db->escape($relatedCategoryOptionName); //Must manually escape values when passing 'false' as first arg to $pl->filter(), otherwise you're open to SQL injection!! See http://www.concrete5.org/community/forums/customizing_c5/pagelist_filter_by_page_custom_attributes/#379922
 		// $pl->filter(false, "(ak_related_content_category LIKE '%\n{$escapedRelatedCategoryOptionName}\n%')"); //See http://www.concrete5.org/developers/pro-accounts/community-leaders-area/community-leaders-discussion/filter-by-attribute/
 		//
 		//One last note about $db->escape() vs. $db->quote() and $db->qstr()... the former escapes quotes in the string, and the latter two escape quotes AND wrap the whole string in quotes.
